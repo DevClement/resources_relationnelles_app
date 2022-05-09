@@ -1,7 +1,9 @@
 import 'package:cube/screen/account_screen.dart';
+import 'package:cube/screen/default_screen.dart';
 import 'package:cube/screen/home_screen.dart';
 import 'package:cube/screen/login_screen.dart';
 import 'package:cube/screen/register_screen.dart';
+import 'package:cube/screen/search_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,12 +19,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
+        DefaultPage.route: (context) => DefaultPage(),
         HomeScreen.route: (context) => HomeScreen(),
-        LoginScreen.route: (context) => LoginScreen(),
-        RegisterScreen.route: (context) => RegisterScreen(),
+        LoginScreen.route: (context) => LoginScreen(null),
+        SearchScreen.route: (context) => SearchScreen(),
         AccountScreen.route: (context) => AccountScreen(),
       },
-      initialRoute: HomeScreen.route,
+      initialRoute: DefaultPage.route,
     );
   }
 }

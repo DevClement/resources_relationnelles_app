@@ -1,3 +1,4 @@
+import 'package:cube/screen/search_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,8 +10,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+      return SingleChildScrollView(
         padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,65 +25,72 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 SizedBox(
                     width: 25,
-                    height: 300,
+                    height: 438,
                     child: Stack(
                       alignment: Alignment.topLeft,
                       children: [
                         _buildDot(20, 0),
-                        _buildLine(40, 11, 3, 120),
-                        _buildDot(150, 0)
+                        _buildLine(40, 11, 3, 438),
                       ],
                     )),
                 Padding(
                   padding: EdgeInsets.all(10),
-                  child: Column(children: <Widget>[
-                    SizedBox(height: 10),
-                    Text(
-                      'Dernières ressources',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    SizedBox(height: 25),
-                    _buildBoxRessource(),
-                    Container(
-                      color: Colors.red,
-                      height: 100,
-                      width: 100,
-                    )
-                  ]),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(height: 10),
+                        Text(
+                          'Dernières ressources',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        SizedBox(height: 25),
+                        _buildBoxRessource(constraints),
+                        SizedBox(height: 25),
+                        _buildBoxRessource(constraints),
+                        SizedBox(height: 25),
+                        _buildBoxRessource(constraints),
+                      ]),
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                    width: 25,
+                    height: 242,
+                    child: Stack(
+                      alignment: Alignment.topLeft,
+                      children: [
+                        _buildDot(20, 0),
+                        _buildLine(40, 11, 3, 202),
+                      ],
+                    )),
+                Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(height: 10),
+                        Text(
+                          'Derniers utilisateurs inscrits',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        SizedBox(height: 25),
+                        _buildBoxUser(constraints),
+                        SizedBox(height: 25),
+                        _buildBoxUser(constraints),
+                        SizedBox(height: 25),
+                        _buildBoxUser(constraints),
+                      ]),
                 )
               ],
             )
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-          currentIndex: 0,
-          fixedColor: Color.fromARGB(255, 13, 148, 136),
-          selectedIconTheme: IconThemeData(
-              color: Color.fromARGB(255, 13, 148, 136), opacity: 1.0, size: 25),
-          unselectedIconTheme:
-              IconThemeData(color: Colors.black45, opacity: 1.0, size: 25),
-          showUnselectedLabels: false,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              label: 'Accueil',
-              icon: Icon(Icons.home),
-            ),
-            BottomNavigationBarItem(
-              label: 'Rechercher',
-              icon: Icon(Icons.search),
-            ),
-            BottomNavigationBarItem(
-              label: 'Ressources',
-              icon: Icon(Icons.menu_book),
-            ),
-            BottomNavigationBarItem(
-              label: 'Compte',
-              icon: Icon(Icons.account_circle),
-            ),
-          ],
-          onTap: (int indexOfItem) {}),
-    );
+      );
+    });
   }
 
   Widget _buildTtitle() {
@@ -103,18 +112,43 @@ class _HomeScreenState extends State<HomeScreen> {
         ));
   }
 
-  Widget _buildBoxRessource() {
+  Widget _buildBoxRessource(BoxConstraints constraints) {
     return Container(
       color: Color(0xFFEEEEEE),
-      constraints: BoxConstraints(
-        maxWidth: MediaQuery.of(context).size.height * 0.30,
-      ),
-      width: 22200,
-      height: 100,
+      width: (constraints.maxWidth * 0.01) * 100 + (25 - 106),
       child: Padding(
-          padding: EdgeInsets.all(8),
+          padding: EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
           child: Column(
-            children: <Widget>[],
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Lorom Impsum',
+                style: TextStyle(fontSize: 18),
+              ),
+              SizedBox(height: 14),
+              Text(
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam facilisis semper tellus id varius.',
+                style: TextStyle(fontSize: 14),
+              ),
+            ],
+          )),
+    );
+  }
+
+  Widget _buildBoxUser(BoxConstraints constraints) {
+    return Container(
+      color: Color(0xFFEEEEEE),
+      width: (constraints.maxWidth * 0.01) * 100 + (25 - 106),
+      child: Padding(
+          padding: EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Tom P.',
+                style: TextStyle(fontSize: 18),
+              ),
+            ],
           )),
     );
   }
